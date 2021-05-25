@@ -3,7 +3,7 @@ title: "ヒカキンシンメトリーbotの技術的なところの話"
 emoji: "😎"
 type: "tech" # tech: 技術記事 / idea: アイデア
 topics: ["nodejs", "typescript", "GCP", "クソアプリ"]
-published: false
+published: true
 ---
 
 突発的にリリースして完全に技術の無駄遣いをしたbotのテクニカルなあれこれを一応書いておこうと思います。  
