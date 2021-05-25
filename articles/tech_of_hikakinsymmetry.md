@@ -1,5 +1,5 @@
 ---
-title: "ヒカキンシンメトリーbotの技術的な話"
+title: "ヒカキンシンメトリーbotの技術的なところの話"
 emoji: "😎"
 type: "tech" # tech: 技術記事 / idea: アイデア
 topics: ["nodejs", "typescript", "GCP", "クソアプリ"]
@@ -54,3 +54,33 @@ OpenCV -> FaceAPI/OpenCV -> Cloud Vision API
 ------------
 
 その他Twitter APIやYoutube Data APIなどありますが、こちらについては特に語ることはないかなと思います。
+
+# 使用しているモジュール
+
+## 画像処理
+
+nodejsで画像処理をしたい場合、[sharp](https://www.npmjs.com/package/sharp)や[Jimp](https://www.npmjs.com/package/jimp)を採用する例が多いと思います。(Googleで日本語記事出てたのはこの2つだけだった)
+このプロジェクトでは最終的に[image-js](https://www.npmjs.com/package/image-js)を使用しています。
+
+Sharpは`Crop`(切り取り)のメソッドが見当たらず、`resize()`をゴリゴリ頑張って使っていくしかなさそうという印象があったので選定の段階で却下としました。
+
+ではJimpはどうだったのかというと、要件は全て満たしており正常通り画像も生成できていたのですがTwitterのAPIにアップロードする段階でかなりの確率で蹴られる謎の現象に遭遇して原因切り分けの結果**Jimpの吐き出してる画像はかなりの高確率で蹴られる**ことがわかったので移行しました。
+
+その後ちゃんとTwitterAPIに通る画像処理ライブラリを探し、辿り着いたのがimage-jsでした。こちらはちゃんと想定通りに画像が生成できてTwitterへのアップロードも成功したので良かったです。
+しかし使用する上で問題があり、何故か一部のメソッドがTS上で定義されていないと怒られる(選定でjsに書いたときは大丈夫)という状態であり、結果的に`require()`で無理やり`Any`にしてインポートして使用するという形に落ち着きました。なんでだろうね。
+
+## Twitterまわり
+
+結論からいうと以下の2つを使っています。
++ [twit](https://www.npmjs.com/package/twit)
++ [twitter-api-client](https://www.npmjs.com/package/twitter-api-client)
+
+前者のtwitはStreamingを使用したツイートの取得に対応していたのでヒカキン氏の投稿の監視に採用していますが、基本的にレスポンスをCallback内で処理するタイプだったので扱いづらいというのが正直なところです。`@types`が提供されていたのは非常にありがたかったです。
+
+後者のtwitter-api-clientは完全にTSで構築されている`Promise`ベースのモジュールで、画像とそれを内包したツイートをアップロードする部分に採用しています。本当はこちらにTwitterまわりの責務を全部ぶん投げてしまいたいのですがStreamingに完全対応しておらずその部分はtwitに任せているという状態です。
+
+## 定期実行
+
+TwitterのデータはStreamingさせているのですがYoutubeからのデータは定期取得させないといけないので、そこは[node-cron](https://www.npmjs.com/package/node-cron)を使っています。
+~~ちなみに私は実行タイミングの設定間違えてFirestoreの読み取りをアホほど発生させたバカ野郎です。みんなは気を付けてね~~
+
