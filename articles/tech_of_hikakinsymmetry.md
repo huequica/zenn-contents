@@ -84,3 +84,24 @@ Sharpは`Crop`(切り取り)のメソッドが見当たらず、`resize()`をゴ
 TwitterのデータはStreamingさせているのですがYoutubeからのデータは定期取得させないといけないので、そこは[node-cron](https://www.npmjs.com/package/node-cron)を使っています。
 ~~ちなみに私は実行タイミングの設定間違えてFirestoreの読み取りをアホほど発生させたバカ野郎です。みんなは気を付けてね~~
 
+# 実際の生成の流れ(以下画伯です)
+
+Twitterから流れてきた画像の場合を例に解説しますと、だいたいこのようなプロセスを経て処理しています。
+
+![プロセスフロー](https://storage.googleapis.com/zenn-user-upload/qiigc7wlr6rgaqrmob5ntzbmba0p)
+
+初めにTwitterに画像が含まれているかどうかを検査し、含まれていた場合はCloudVisionAPIへ顔の検出をリクエストします。
+
+[詳細](https://cloud.google.com/vision/docs/reference/rest/v1p2beta1/images/annotate#faceannotation)は省きますが、リクエストして顔が検出された場合レスポンスの中には `BoundingPoly`と`fdBoundingPoly`というキー名のプロパティが含まれています。
+両者とも顔の矩形の情報を内包したオブジェクト情報ですが、`fdBoundingPoly`はより狭い顔のパーツが入る矩形を示しています。(図を見たら分かりやすいとおもいます)
+ちなみに`fd`は`faceDetection`の略語です。
+
+> fd
+> 
+> (face detection) prefix.
+
+![](https://storage.googleapis.com/zenn-user-upload/htqexex1tbidtks20l24cn1rfx02)
+
+`fdBoundingPoly.vertices`は顔の矩形の頂点座標が入っており、この頂点座標から顔の中心を割り出してそれを軸にシンメトリー画像を作っています。
+
+あとは軸座標を使用して画像を切り抜いて反転、くっつけて完成、アップロードの流れになります。
