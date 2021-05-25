@@ -3,5 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "author": "huequica <harumaki1225@gmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "zenn-cli": "^0.1.81"
+  }
 }
