@@ -8,6 +8,6 @@
     "start": "zenn preview"
   },
   "dependencies": {
-    "zenn-cli": "^0.1.81"
+    "zenn-cli": "^0.1.91"
   }
 }
