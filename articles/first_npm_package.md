@@ -3,7 +3,7 @@ title: "npmのパッケージをリリースしてCI/CDさせるまでやって�
 emoji: "📁"
 type: "tech"
 topics: ["npm", "typescript", "circleci"]
-published: false
+published: true
 ---
 
 以前ヒカキンシンメトリーbotを書き直したという話をしたのですが一応まだメンテナンスを続けており、それなりに改善を続けています。
