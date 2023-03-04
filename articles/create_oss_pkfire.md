@@ -3,7 +3,7 @@ title: "ESLint とかのインストールだるくないすか？を解決す�
 emoji: "🔥"
 type: "tech" # tech: 技術記事 / idea: アイデア
 topics: ["typescript", "eslint", "prettier", "nuxtjs", "nextjs"]
-published: false
+published: true
 ---
 
 # tl;dr;
