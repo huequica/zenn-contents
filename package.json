@@ -1,13 +1,13 @@
 {
-  "name": "tech_of_hikakinSymmetry",
+  "name": "@huequica/zenn-contents",
   "version": "1.0.0",
   "main": "index.js",
-  "author": "huequica <harumaki1225@gmail.com>",
+  "author": "huequica <dev@huequica.xyz>",
   "license": "MIT",
   "scripts": {
     "start": "zenn preview"
   },
   "dependencies": {
-    "zenn-cli": "^0.1.91"
+    "zenn-cli": "^0.1.141"
   }
 }
