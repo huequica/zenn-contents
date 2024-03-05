@@ -31,6 +31,7 @@ published: true
 という 4 点が大きく問題でした。今までは気力で解決していましたがここ最近のハードウェアメンテでやる気が死ぬ事件が起きてそれで移行を決意しました。
 
 # 今のアーキテクチャ
+
 ![](https://storage.googleapis.com/zenn-user-upload/bdda4b354dee-20240305.png)
 
 1. Cloudflare tunnel で自宅サーバと Cloudflare 環境を繋ぐ
