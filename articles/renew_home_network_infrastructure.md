@@ -10,6 +10,7 @@ published: true
 そんな私ですが Ubuntu のサーバーを管理するのにいちいち SSH しないといけなかったりリバースプロキシのコンフィグを書かないといけなかったりでとても疲れてしまったのでそれを解消 + 機能的な改善を求めて proxmox VE(以下 proxmox ) と Cloudflare tunnel を使用した環境へと移行しましたのでその紹介をしたいと思います。
 
 # 以前の自宅サーバ周りのアーキテクチャ
+
 ![](https://storage.googleapis.com/zenn-user-upload/5f1d440190b3-20240305.png)
 画像の通りですが
 
