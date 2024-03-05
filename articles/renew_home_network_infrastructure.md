@@ -3,7 +3,7 @@ title: "自宅鯖の公開環境を Cloudflare tunnel と proxmox で更新し�
 emoji: "🏠"
 type: "tech"
 topics: ["proxmox", "自宅サーバー", "cloudflare"]
-published: false
+published: true
 ---
 
 これは Twitter 見るとゴリゴリに bio に書いてあるんですが、自分は自宅鯖(通称 𝗚𝗮𝗺𝗶𝗻𝗴 𝗦𝗲𝗿𝘃𝗲𝗿 )をひっそり運営していてなんかいろんなサービスが動いていたりします。
