@@ -60,7 +60,7 @@ type EnumType = z.infer<typeof SampleEnum>;
 ```
 
 しかし ZodEnum には `pick` だったり `omit` だったりがないわけですね、どうしようとなるわけです。
-実は `pick` は `extract` 、 `omit` は `extract` の名前で用意されていてこれを使えます。
+実は `pick` は `extract` 、 `omit` は `exclude` の名前で用意されていてこれを使えます。
 
 ```ts
 const SampleEnum = z.enum(['banana', 'apple', 'grape']);
